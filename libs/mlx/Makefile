@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 20:10:53 by marvin            #+#    #+#              #
-#    Updated: 2023/05/06 23:35:23 by thfirmin         ###   ########.fr        #
+#    Updated: 2023/05/07 02:13:49 by thfirmin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ endif
 # <+-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-' #
 # +>                                     CODES 
 
-BLANK			= \e[m
+NULL			= \e[m
 RED				= \e[38;5;9m
 YELLOW			= \e[38;5;11m
 GREEN			= \e[38;5;2m
@@ -62,7 +62,9 @@ update_tools:
 	make -C $(MLX_PTH) && sleep 0.5
 
 $(NAME): $(MLX_PTH)$(NAME)
+	@printf "[${YELLOW}${BOLD}INFO${NULL}] ${UNDINE}Compiling${NULL} ${NAME} library\n" $(REDIR)
 	cp $(MLX_PTH)$(NAME) .
+	@printf "[${GREEN}${BOLD}INFO${NULL}] ${NAME} library ${BOLD}Compiled${NULL}\n" $(REDIR)
 
 import_header:
 ifeq (,$(shell ls $(MLX_HEADER) 2> /dev/null))
@@ -73,11 +75,10 @@ clean:
 	make -C $(MLX_PTH) clean
 
 fclean: clean
-ifneq (,$(shell ls $(NAME) 2> /dev/null))
-	rm -rf $(NAME)
-endif
-ifneq (,$(shell ls $(MLX_HEADER) 2> /dev/null))
-	rm -rf $(MLX_HEADER)
+ifneq (,$(shell ls $(NAME) $(MLX_HEADER) 2> /dev/null))
+	@printf "[${YELLOW}${BOLD}INFO${NULL}] ${UNDLINE}Deleting${NULL} ${NAME} library\n" $(REDIR)
+	rm -rf $(shell ls $(NAME) $(MLX_HEADER) 2> /dev/null)
+	@printf "[${RED}${BOLD}INFO${NULL}] ${NAME} library ${BOLD}Deleted${NULL}\n" $(REDIR)
 endif
 
 re:	fclean all

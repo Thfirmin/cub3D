@@ -6,7 +6,7 @@
 #    By: thfirmin <thiagofirmino2001@gmail.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/11 21:07:07 by thfirmin          #+#    #+#              #
-#    Updated: 2023/04/29 14:41:55 by thfirmin         ###   ########.fr        #
+#    Updated: 2023/05/07 02:15:24 by thfirmin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,13 +66,7 @@ FULLER			= \e[7m
 all:	$(SRCS)
 
 $(SRCS):
-	@if [ "$@" = "$(firstword $(SRCS))" ]; then \
-		printf "[${YELLOW}${BOLD}INFO${NULL}] ${UNDINE}Compiling${NULL} ${NAME} library\n" $(REDIR); \
-	fi
 	make -C $(PTH_SRC)$@ && sleep 1
-	@if [ "$@" = "$(lastword $(SRCS))" ]; then \
-		printf "[${GREEN}${BOLD}INFO${NULL}] ${NAME} library ${BOLD}Compiled${NULL}\n" $(REDIR); \
-	fi
 
 bonus:
 	$(foreach lib, $(LIBS), make bonus -C $(lib);)

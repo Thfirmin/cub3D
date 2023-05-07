@@ -32,9 +32,9 @@ UIFLAGS	=
 
 # User flags to links (ex. -L. -lft)
 ifeq ($(OS),Darwin)
-	ULFLAGS	=-framework OpenGL -framework AppKit
+	ULFLAGS	=-framework OpenGL -framework AppKit -lm
 else ifeq ($(OS),Linux)
-	ULFLAGS	=-lXext -lX11 -lz
+	ULFLAGS	=-lXext -lX11 -lz -lm
 endif
 
 # User flags to debug (ex. -g -fsanitize=address)
@@ -85,7 +85,7 @@ ifneq (1,$(LOG))
 	MAKEFLAGS += --silent
 endif
 ifneq (,$(LOG))
-	export REDIR = > /dev/null
+	export REDIR = &> /dev/null
 endif
 
 # <+-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-' #
