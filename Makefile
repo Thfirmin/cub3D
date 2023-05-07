@@ -3,9 +3,9 @@
 # Name of gerated program
 NAME	= cub3D
 # Operational Sytem
-OS		!= uname
+OS		= $(shell uname)
 # Shell interpreter
-SH		!= echo ${SHELL} | sed "s/.*\///g" 
+SH		= $(shell echo ${SHELL} | sed "s/.*\///g")
 
 # <+-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-' #
 # +>                                   LOCAL
@@ -33,10 +33,8 @@ UIFLAGS	=
 # User flags to links (ex. -L. -lft)
 ifeq ($(OS),Darwin)
 	ULFLAGS	=-framework OpenGL -framework AppKit
-	MLX = $(shell tar -xf $(LIB_PTH)/minilibx-$(OS).tar -C $(LIB_PTH)/)
 else ifeq ($(OS),Linux)
 	ULFLAGS	=-lXext -lX11 -lz
-	MLX = $(shell tar -xf $(LIB_PTH)/minilibx-$(OS).tar -C $(LIB_PTH)/)
 endif
 
 # User flags to debug (ex. -g -fsanitize=address)
@@ -55,13 +53,14 @@ UDEFINS	=
 INC_TREE	= $(shell ls -d $(INC_PTH) 2> /dev/null) $(shell find $(LIB_PTH) -type f 2> /dev/null | tr ' ' '\n' | grep \\.h$$ | sed "s/[^/]*\.h$$//g" | uniq)
 SRC_TREE	= $(shell echo $(SRCS) | tr ' ' '\n' | sed "s/[^/]*\.c$$//g" | uniq)
 OBJ_TREE	= $(subst $(SRC_PTH),$(OBJ_PTH),$(SRC_TREE))
-LIB_TREE	!= find $(LIB_PTH) -mindepth 1 -type d 2> /dev/null | sed "s/.*\///g"
+LIB_TREE	= $(shell find $(LIB_PTH) -mindepth 1 -maxdepth 1 -type d 2> /dev/null | sed "s/.*\///g")
+
 
 # <+-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-' #
 # +>                                  SOURCES
 
 # Wildcard  implemention without wildcard operator [DON'T TOUCH IT!!!]
-SRCS	!= find ${SRC_PTH} -type f 2> /dev/null | tr ' ' '\n' | grep \\.c$$
+SRCS	= $(shell find ${SRC_PTH} -type f 2> /dev/null | tr ' ' '\n' | grep \\.c$$)
 
 OBJS	= $(subst $(SRC_PTH),$(OBJ_PTH),$(subst .c,.o,$(SRCS)))
 
@@ -117,16 +116,16 @@ FULLER		= \e[7m
 # +>                                    ENVS
 
 CC		=cc
-CFLAGS	=$(ACFLAGS)$(UCFLAGS)
-LFLAGS	=$(ALFLAGS)$(ULFLAGS) 
-IFLAGS	=$(AICFLAGS)$(UIFLAGS)
-OFLAGS	=$(AOFLAGS)$(UOFLAGS)
-DFLAGS	=$(ADFLAGS)$(UDFLAGS)
-DEFINS	=$(ADEFINS)$(UDEFINS)
+CFLAGS	=$(ACFLAGS) $(UCFLAGS)
+LFLAGS	=$(ALFLAGS) $(ULFLAGS) 
+IFLAGS	=$(AIFLAGS) $(UIFLAGS)
+OFLAGS	=$(AOFLAGS) $(UOFLAGS)
+DFLAGS	=$(ADFLAGS) $(UDFLAGS)
+DEFINS	=$(ADEFINS) $(UDEFINS)
 # <+-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-' #
 # +>                                   SCRIPT
 
-all:	$(OBJ_TREE) lib_update $(NAME) test
+all:	$(OBJ_TREE) lib_update $(NAME)
 
 $(OBJ_TREE):
 	mkdir -p $@
@@ -134,13 +133,10 @@ $(OBJ_TREE):
 lib_update:
 	$(foreach libs, $(LIB_TREE), make -C $(LIB_PTH)/$(libs);)
 
-test:
-	echo HERE\"$(LIB_TREE)\"
-
 $(NAME):	$(OBJS)
 ifneq (,$(OBJS))
 	@printf "[${YELLOW}${BOLD}INFO${NULL}] ${UNDLINE}Compiling${NULL} ${NAME}\n" $(REDIR)
-	$(CC) $(CFLAGS) $(DFLAGS) $(OFLAGS) $(OBJS) $(IFLAGS) $(LFLAGS) -o $(NAME) 
+	$(CC) $(CFLAGS) $(DFLAGS) $(OFLAGS) $(IFLAGS) $(OBJS) $(LFLAGS) -o $(NAME) 
 	@printf "[${GREEN}${BOLD}INFO${NULL}] ${BOLD}Compiled ${NAME}${NULL}\n" $(REDIR)
 endif
 
