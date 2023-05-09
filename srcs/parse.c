@@ -6,17 +6,20 @@
 /*   By: jsantann <jsantann@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 23:26:06 by jsantann          #+#    #+#             */
-/*   Updated: 2023/05/09 00:28:51 by jsantann         ###   ########.fr       */
+/*   Updated: 2023/05/09 00:33:42 by jsantann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-void	error_menu(char **argv, int argc)
+int	error_menu(char **argv, int argc)
 {
+	int	fd;
+
 	error_argc(argc);
-	error_permission(argv[1]);
+	fd = error_permission(argv[1]);
 	error_filename(argv[1]);
+	return (fd);
 }
 
 void	error_argc(int argc)
@@ -31,14 +34,18 @@ void	error_argc(int argc)
 	}
 }
 
-void	error_permission(char *argv)
+int	error_permission(char *argv)
 {
-	if (open(argv, O_RDONLY) == -1)
+	int	fd;
+
+	fd = open(argv, O_RDONLY);
+	if (fd == -1)
 	{
 		ft_putstr_fd("Error\n", 2);
 		perror(argv);
 		exit(0);
 	}
+	return (fd);
 }
 
 void	error_filename(char *argv)
