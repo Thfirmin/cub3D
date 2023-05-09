@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thfirmin <thfirmin@student.42.rio>         +#+  +:+       +#+        */
+/*   By: jsantann <jsantann@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/07 02:03:12 by thfirmin          #+#    #+#             */
-/*   Updated: 2023/05/08 23:44:07 by jsantann         ###   ########.fr       */
+/*   Created: 2023/05/08 23:19:24 by jsantann          #+#    #+#             */
+/*   Updated: 2023/05/09 00:11:51 by jsantann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include "parse.h"
+#ifndef PARSE_H
+# define PARSE_H
 
-int	main(int argc, char **argv)
-{
-	error_menu(argv, argc);
-	(void) argv;
-	return (0);
-}
+# include "cub3d.h"
+
+void	error_menu(char **argv, int argc);
+void	error_argc(int argc);
+void	error_filename(char *argv);
+
+#endif
