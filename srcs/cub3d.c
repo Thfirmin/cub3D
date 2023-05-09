@@ -6,7 +6,7 @@
 /*   By: thfirmin <thfirmin@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 02:03:12 by thfirmin          #+#    #+#             */
-/*   Updated: 2023/05/08 23:44:07 by jsantann         ###   ########.fr       */
+/*   Updated: 2023/05/09 00:33:02 by jsantann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 
 int	main(int argc, char **argv)
 {
-	error_menu(argv, argc);
+	int	fd;
+
+	fd = error_menu(argv, argc);
 	(void) argv;
 	return (0);
 }
