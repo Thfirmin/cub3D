@@ -6,7 +6,7 @@
 /*   By: jsantann <jsantann@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 23:26:06 by jsantann          #+#    #+#             */
-/*   Updated: 2023/05/08 23:58:54 by jsantann         ###   ########.fr       */
+/*   Updated: 2023/05/09 00:07:02 by jsantann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,5 @@ void	error_filename(char *argv)
 		ft_putstr_fd("The extension of map must be .cub\n", 2);
 		exit(0);
 	}
+	free(res);
 }
