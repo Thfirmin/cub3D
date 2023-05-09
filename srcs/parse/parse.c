@@ -6,16 +6,21 @@
 /*   By: jsantann <jsantann@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 23:26:06 by jsantann          #+#    #+#             */
-/*   Updated: 2023/05/09 00:10:10 by jsantann         ###   ########.fr       */
+/*   Updated: 2023/05/09 00:36:11 by jsantann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-void	error_menu(char **argv, int argc)
+int	error_menu(char **argv, int argc)
 {
+	int	fd;
+
+	fd = -1;
 	error_argc(argc);
+	fd = error_permission(argv[1]);
 	error_filename(argv[1]);
+	return (fd);
 }
 
 void	error_argc(int argc)
@@ -28,6 +33,20 @@ void	error_argc(int argc)
 		ft_putstr_fd("./cub3d filename.cub\n", 2);
 		exit(0);
 	}
+}
+
+int	error_permission(char *argv)
+{
+	int	fd;
+
+	fd = open(argv, O_RDONLY);
+	if (fd == -1)
+	{
+		ft_putstr_fd("Error\n", 2);
+		perror(argv);
+		exit(0);
+	}
+	return (fd);
 }
 
 void	error_filename(char *argv)
