@@ -6,7 +6,7 @@
 /*   By: jsantann <jsantann@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 23:26:06 by jsantann          #+#    #+#             */
-/*   Updated: 2023/05/09 00:33:42 by jsantann         ###   ########.fr       */
+/*   Updated: 2023/05/09 00:36:11 by jsantann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	error_menu(char **argv, int argc)
 {
 	int	fd;
 
+	fd = -1;
 	error_argc(argc);
 	fd = error_permission(argv[1]);
 	error_filename(argv[1]);
