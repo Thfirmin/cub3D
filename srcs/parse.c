@@ -6,7 +6,7 @@
 /*   By: jsantann <jsantann@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 23:26:06 by jsantann          #+#    #+#             */
-/*   Updated: 2023/05/08 23:49:32 by jsantann         ###   ########.fr       */
+/*   Updated: 2023/05/08 23:58:54 by jsantann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,17 @@ void	error_argc(int	argc)
 
 void	error_filename(char *argv)
 {
-	printf("%s\n", argv);
+	int		size;
+	int		start;
+	char	*res;
+
+	size = ft_strlen(argv);
+	start = size - 4;
+	res = ft_substr(argv, start, size);
+	if (ft_strncmp(res, ".cub", 4))
+	{
+		ft_putstr_fd("Error\n", 2);
+		ft_putstr_fd("The extension of map must be .cub\n", 2);
+		exit(0);
+	}
 }
