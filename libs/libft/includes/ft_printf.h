@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thfirmin <thfirmin@student.42.rio>         +#+  +:+       +#+        */
+/*   By: thfirmin <thiagofirmino2001@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/07 01:59:28 by thfirmin          #+#    #+#             */
-/*   Updated: 2023/05/16 17:12:25 by thfirmin         ###   ########.fr       */
+/*   Created: 2022/11/06 17:13:30 by thfirmin          #+#    #+#             */
+/*   Updated: 2023/03/08 14:19:52 by thfirmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
-# include <stdio.h>
-# include <errno.h>
-# include <string.h>
-# include <fcntl.h>
-# include <math.h>
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
+# define MASK "cspdiuxX%"
+# include <stdarg.h>
 # include "libft.h"
-# include "mlx.h"
-# include "get_next_line.h"
 
-typedef struct s_cube
-{
-	char	**map;
-	char	**path;
-	t_mem	*sum;	
-}	t_cube;
+int	ft_printf(const char *format, ...);
+
+int	ft_puthex_fd(long unsigned int hex, char mode, int fd);
+int	ft_putunbr_fd(unsigned int unbr, int fd);
 
 #endif

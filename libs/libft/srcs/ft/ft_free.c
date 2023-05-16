@@ -1,31 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thfirmin <thfirmin@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/07 01:59:28 by thfirmin          #+#    #+#             */
-/*   Updated: 2023/05/16 17:12:25 by thfirmin         ###   ########.fr       */
+/*   Created: 2023/05/12 14:11:41 by thfirmin          #+#    #+#             */
+/*   Updated: 2023/05/12 14:44:01 by thfirmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
-# include <stdio.h>
-# include <errno.h>
-# include <string.h>
-# include <fcntl.h>
-# include <math.h>
-# include "libft.h"
-# include "mlx.h"
-# include "get_next_line.h"
+#include "libft.h"
 
-typedef struct s_cube
+void	ft_free(void *ptr, t_mem **mem)
 {
-	char	**map;
-	char	**path;
-	t_mem	*sum;	
-}	t_cube;
+	t_mem	*set;
+	t_mem	*aux;
 
-#endif
+	if (!mem || !*mem)
+		return ;
+	set = *mem;
+	while (set)
+	{
+		if (set->ptr == ptr)
+		{
+			if (set == *mem)
+				*mem = (**mem).next;
+			else
+				aux->next = set->next;
+			free (set->ptr);
+			free (set->context);
+			free (set);
+			return ;
+		}
+		aux = set;
+		set = set->next;
+	}
+}

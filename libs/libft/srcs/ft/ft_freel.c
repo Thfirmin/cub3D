@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   ft_freel.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thfirmin <thfirmin@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/07 01:59:28 by thfirmin          #+#    #+#             */
-/*   Updated: 2023/05/16 17:12:25 by thfirmin         ###   ########.fr       */
+/*   Created: 2023/05/12 14:12:16 by thfirmin          #+#    #+#             */
+/*   Updated: 2023/05/13 13:20:10 by thfirmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
-# include <stdio.h>
-# include <errno.h>
-# include <string.h>
-# include <fcntl.h>
-# include <math.h>
-# include "libft.h"
-# include "mlx.h"
-# include "get_next_line.h"
+#include "libft.h"
 
-typedef struct s_cube
+void	ft_freel(t_mem **mem)
 {
-	char	**map;
-	char	**path;
-	t_mem	*sum;	
-}	t_cube;
+	t_mem	*nxt;
 
-#endif
+	if (!mem)
+		return ;
+	while (*mem)
+	{
+		nxt = (**mem).next;
+		free ((**mem).ptr);
+		free ((**mem).context);
+		free (*mem);
+		*mem = nxt;
+	}
+}

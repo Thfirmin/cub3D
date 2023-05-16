@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   ft_memsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thfirmin <thfirmin@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/07 01:59:28 by thfirmin          #+#    #+#             */
-/*   Updated: 2023/05/16 17:12:25 by thfirmin         ###   ########.fr       */
+/*   Created: 2023/05/12 14:14:15 by thfirmin          #+#    #+#             */
+/*   Updated: 2023/05/12 14:48:07 by thfirmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
-# include <stdio.h>
-# include <errno.h>
-# include <string.h>
-# include <fcntl.h>
-# include <math.h>
-# include "libft.h"
-# include "mlx.h"
-# include "get_next_line.h"
+#include "libft.h"
 
-typedef struct s_cube
+int	ft_memsize(t_mem *mem)
 {
-	char	**map;
-	char	**path;
-	t_mem	*sum;	
-}	t_cube;
+	int	size;
 
-#endif
+	size = 0;
+	while (mem && ++size)
+		mem = mem->next;
+	return (size);
+}

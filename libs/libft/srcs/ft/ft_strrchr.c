@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thfirmin <thfirmin@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/07 01:59:28 by thfirmin          #+#    #+#             */
-/*   Updated: 2023/05/16 17:12:25 by thfirmin         ###   ########.fr       */
+/*   Created: 2022/05/12 20:41:57 by thfirmin          #+#    #+#             */
+/*   Updated: 2023/01/21 12:15:56 by thfirmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
-# include <stdio.h>
-# include <errno.h>
-# include <string.h>
-# include <fcntl.h>
-# include <math.h>
-# include "libft.h"
-# include "mlx.h"
-# include "get_next_line.h"
+#include "libft.h"
 
-typedef struct s_cube
+// Locate last occurrence of character in string
+char	*ft_strrchr(const char *s, int c)
 {
-	char	**map;
-	char	**path;
-	t_mem	*sum;	
-}	t_cube;
+	int	count;
 
-#endif
+	count = (ft_strlen(s) + 1);
+	while (--count > -1)
+		if (*(s + count) == (char) c)
+			return ((char *)s + count);
+	return (0);
+}

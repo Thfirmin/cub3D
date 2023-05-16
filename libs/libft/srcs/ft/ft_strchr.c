@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thfirmin <thfirmin@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/07 01:59:28 by thfirmin          #+#    #+#             */
-/*   Updated: 2023/05/16 17:12:25 by thfirmin         ###   ########.fr       */
+/*   Created: 2022/05/12 20:25:02 by thfirmin          #+#    #+#             */
+/*   Updated: 2023/01/21 11:22:11 by thfirmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
-# include <stdio.h>
-# include <errno.h>
-# include <string.h>
-# include <fcntl.h>
-# include <math.h>
-# include "libft.h"
-# include "mlx.h"
-# include "get_next_line.h"
+#include "libft.h"
 
-typedef struct s_cube
+// Locate first occurrence of character in string
+char	*ft_strchr(const char *s, int c)
 {
-	char	**map;
-	char	**path;
-	t_mem	*sum;	
-}	t_cube;
+	int	count;
 
-#endif
+	count = -1;
+	while (*(s + ++count))
+		if (*(s + count) == (char) c)
+			return ((char *) s + count);
+	if (!c)
+		return ((char *) s + count);
+	else
+		return (0);
+}

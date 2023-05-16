@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thfirmin <thfirmin@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/07 01:59:28 by thfirmin          #+#    #+#             */
-/*   Updated: 2023/05/16 17:12:25 by thfirmin         ###   ########.fr       */
+/*   Created: 2022/06/15 05:50:39 by thfirmin          #+#    #+#             */
+/*   Updated: 2023/03/07 21:13:20 by thfirmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
-# include <stdio.h>
-# include <errno.h>
-# include <string.h>
-# include <fcntl.h>
-# include <math.h>
-# include "libft.h"
-# include "mlx.h"
-# include "get_next_line.h"
+#include "libft.h"
 
-typedef struct s_cube
+// Output a number in the gived file descriptor
+int	ft_putnbr_fd(int n, int fd)
 {
-	char	**map;
-	char	**path;
-	t_mem	*sum;	
-}	t_cube;
+	unsigned int	num;
+	int				len;
 
-#endif
+	len = 0;
+	if (n < 0)
+	{
+		len += ft_putchar_fd('-', fd);
+		num = -n;
+	}
+	else
+		num = n;
+	if (num >= 10)
+		len += ft_putnbr_fd((num / 10), fd);
+	len += ft_putchar_fd(((num % 10) + '0'), fd);
+	return (len);
+}
