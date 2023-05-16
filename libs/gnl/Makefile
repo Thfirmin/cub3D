@@ -6,42 +6,36 @@
 #    By: thfirmin <thiagofirmino2001@gmail.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/11 21:07:07 by thfirmin          #+#    #+#              #
-#    Updated: 2023/05/12 13:26:43 by thfirmin         ###   ########.fr        #
+#    Updated: 2023/01/08 02:22:40 by thfirmin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # +>                                     NAME 
 
-NAME	= libft.a
-
-export MASTERLIB	= $(addprefix $(PTH_HERE),$(NAME))
-# <+-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-' #
-# +>                                     PATHS 
-
-PTH_SRC		= srcs/
-PTH_HERE	= $(shell pwd)/
-PTH_INC		= includes/
+NAME	= libgnl.a
 # <+-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-' #
 # +>                                    SOURCES 
 
-SRCS	= $(shell ls $(PTH_SRC))
-LIBS	= $(shell find $(PTH_SRC) -mindepth 1 -maxdepth 1 -type d)
+MDTRY_SRCS	= get_next_line.c \
+			  get_next_line_utils.c
+
+BN_SRCS	= get_next_line_bonus.c \
+		  get_next_line_utils_bonus.c
+
+MDTRY_OBJS	= $(MDTRY_SRCS:.c=.o)
+
+BN_OBJS		= $(BN_SRCS:.c=.o)
 # <+-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-' #
-# +>                                    CONFIG
+# +>                                    ALIASES 
 
-export IFLAGS	= -I$(PTH_HERE) -I$(PTH_HERE)$(PTH_INC)
-MAKEFLAGS		+= --no-print-directory
-
-ifneq (1, $(LOG))
-	MAKEFLAGS += --silent
-endif
-ifneq (,$(LOG))
-	export REDIR = > /dev/null
-endif
+CC			= cc
+CFLAGS		= -Wall -Wextra -Werror
+MAKEFLAGS	+= --no-print-directory
+MAKE		= make -C
 # <+-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-' #
 # +>                                     CODES 
 
-NULL			= \e[m
+BLANK			= \e[m
 RED				= \e[38;5;9m
 YELLOW			= \e[38;5;11m
 GREEN			= \e[38;5;2m
@@ -63,34 +57,42 @@ FULLER			= \e[7m
 # <+-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-' #
 # +>                                     RULES 
 
-all:	$(SRCS)
+.c.o:
+	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
-$(SRCS):
-	make -C $(PTH_SRC)$@ && sleep 1
+all:	OBJS := $(MDTRY_OBJS)
 
-bonus:
-	$(foreach lib, $(LIBS), make bonus -C $(lib);)
+all:	$(MDTRY_OBJS) $(NAME)
 
-mclean:
-	$(foreach lib, $(LIBS), make mclean -C $(lib);)
+bonus:	OBJS := $(BN_OBJS)
 
-bclean:
-	$(foreach lib, $(LIBS), make bclean -C $(lib);)
+bonus:	$(BN_OBJS) $(NAME)
+
+debug:	CFLAGS += -g
+
+debug:	re
+
+$(NAME):	$(OBJS)
+	ar rcs $(NAME) $(OBJS)
+	ranlib $(NAME)
 
 clean:
-	$(foreach lib, $(LIBS), make clean -C $(lib);)
-
-fclean:	clean
-ifneq (,$(shell ls $(MASTERLIB) 2> /dev/null))
-	@printf "[${YELLOW}${BOLD}INFO${NULL}] ${UNDLINE}Deleting${NULL} ${NAME} library\n" $(REDIR)
-	rm -rf $(MASTERLIB)
-	@printf "[${RED}${BOLD}INFO${NULL}] ${NAME} library ${BOLD}Deleted${NULL}\n" $(REDIR)
+ifneq (,$(shell ls $(MDTRY_OBJS) 2> /dev/null))
+	rm -rf $(MDTRY_OBJS)
+endif
+ifneq (,$(shell ls $(BN_OBJS) 2> /dev/null))
+	rm -rf $(BN_OBJS)
 endif
 
-bre: fclean bonus
+fclean:		clean
+ifneq (,$(shell ls $(NAME) 2> /dev/null))
+	rm -rf $(NAME)
+endif
 
-re: fclean all
+re:			fclean all
 
-.PHONY:		all update_libs bonus mclean bclean clean fclean re bre
+bre:		fclean bonus
+
+.PHONY:		all bonus debug clean fclean re bre
 # <+-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-' #
 # vim: fdm=marker fmr=+>,<+ ts=4 sw=4 nofen noet:

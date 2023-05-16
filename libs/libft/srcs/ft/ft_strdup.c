@@ -6,19 +6,19 @@
 /*   By: thfirmin <thfirmin@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 05:25:23 by thfirmin          #+#    #+#             */
-/*   Updated: 2023/01/21 11:23:22 by thfirmin         ###   ########.fr       */
+/*   Updated: 2023/05/14 10:54:01 by thfirmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 // Duplicate a string into a allocated string
-char	*ft_strdup(const char *s1)
+char	*ft_strdup(const char *s1, t_mem **mem)
 {
 	char	*str;
 	char	*ptr;
 
-	str = malloc(ft_strlen(s1) + 1);
+	str = ft_malloc((ft_strlen(s1) + 1), "ft_strdup", mem);
 	if (!str)
 		return (0);
 	ptr = str;

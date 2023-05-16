@@ -6,19 +6,22 @@
 /*   By: thfirmin <thfirmin@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 23:22:34 by thfirmin          #+#    #+#             */
-/*   Updated: 2023/01/21 11:29:17 by thfirmin         ###   ########.fr       */
+/*   Updated: 2023/05/14 10:29:09 by thfirmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 // Concatenate two strings in a allocated string
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2, t_mem **mem)
 {
 	char	*newstr;
 	char	*ptr;
+	int		len;
 
-	newstr = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	len = (ft_strlen(s1) + ft_strlen(s2) + 1);
+
+	newstr = ft_malloc(len * sizeof(char), "ft_strjoin", mem);
 	if (!newstr)
 		return ((void *)0);
 	ptr = newstr;

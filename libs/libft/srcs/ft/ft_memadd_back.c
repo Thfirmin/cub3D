@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
+/*   ft_memadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thfirmin <thfirmin@student.42.rio>         +#+  +:+       +#+        */
+/*   By: tde-souz <tde-souz@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/06 14:58:13 by thfirmin          #+#    #+#             */
-/*   Updated: 2023/01/20 23:48:20 by thfirmin         ###   ########.fr       */
+/*   Created: 2022/10/06 14:54:49 by thfirmin          #+#    #+#             */
+/*   Updated: 2023/05/12 13:36:27 by thfirmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// Deletes each node from this list node
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+//  Add a node at the end of a list
+void	ft_memadd_back(t_mem **mem, t_mem *new)
 {
-	t_list	*nxt;
+	t_mem	*node;
 
-	while (*lst)
-	{
-		nxt = (**lst).next;
-		if (del)
-			del((**lst).content);
-		free (*lst);
-		*lst = nxt;
-	}
+	node = *mem;
+	if (node)
+		while (node->next)
+			node = node->next;
+	if (!node)
+		*mem = new;
+	else
+		node->next = new;
 }

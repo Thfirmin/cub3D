@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_memadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thfirmin <thfirmin@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/06 15:06:56 by thfirmin          #+#    #+#             */
-/*   Updated: 2023/01/21 11:12:08 by thfirmin         ###   ########.fr       */
+/*   Created: 2022/10/06 14:57:00 by thfirmin          #+#    #+#             */
+/*   Updated: 2023/05/12 13:37:15 by thfirmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// Return the number of nodes in a list
-int	ft_lstsize(t_list *lst)
+// Add a node at the beginning of a list
+void	ft_memadd_front(t_mem **mem, t_mem *new)
 {
-	int	size;
-
-	size = 0;
-	while (lst && ++size)
-		lst = lst->next;
-	return (size);
+	new->next = *mem;
+	*mem = new;
 }

@@ -6,7 +6,7 @@
 /*   By: thfirmin <thfirmin@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 01:37:06 by thfirmin          #+#    #+#             */
-/*   Updated: 2023/01/21 11:20:21 by thfirmin         ###   ########.fr       */
+/*   Updated: 2023/05/14 10:25:28 by thfirmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int		ft_setjumper(char const *s, char set);
 static int		ft_count_words(char const *s, char set);
 
 // split a file into pieces
-char	**ft_split(const char *s, char c)
+char	**ft_split(const char *s, char c, t_mem **mem)
 {
 	char	**split;
 	int		words;
@@ -30,7 +30,7 @@ char	**ft_split(const char *s, char c)
 	if (!s)
 		return (0);
 	words = ft_count_words(s, c);
-	split = malloc((words + 1) * sizeof(char *));
+	split = ft_malloc((words + 1) * sizeof(char *), "ft_split", mem);
 	if (!split)
 		return (0);
 	i = -1;
@@ -40,7 +40,7 @@ char	**ft_split(const char *s, char c)
 		if ((!start && *s == c) || start)
 			start += ft_setjumper((s + start), c);
 		len = ft_wordlen((s + start), c);
-		*(split + i) = ft_substr(s, start, len);
+		*(split + i) = ft_substr(s, start, len, mem);
 		start += len;
 	}
 	*(split + words) = (void *)0;

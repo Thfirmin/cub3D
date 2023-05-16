@@ -6,7 +6,7 @@
 /*   By: jsantann <jsantann@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 23:26:06 by jsantann          #+#    #+#             */
-/*   Updated: 2023/05/16 16:22:45 by jsantann         ###   ########.fr       */
+/*   Updated: 2023/05/16 17:11:44 by thfirmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	error_filename(char *argv)
 
 	size = ft_strlen(argv);
 	start = size - 4;
-	res = ft_substr(argv, start, size);
+	res = ft_substr(argv, start, size, 0);
 	if (ft_strncmp(res, ".cub", 4))
 	{
 		ft_putstr_fd("Error\n", 2);

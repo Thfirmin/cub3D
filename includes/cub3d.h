@@ -6,7 +6,7 @@
 /*   By: thfirmin <thfirmin@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 01:59:28 by thfirmin          #+#    #+#             */
-/*   Updated: 2023/05/07 02:02:44 by thfirmin         ###   ########.fr       */
+/*   Updated: 2023/05/16 17:12:25 by thfirmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <math.h>
 # include "libft.h"
 # include "mlx.h"
+# include "get_next_line.h"
 
 typedef struct s_cube
 {

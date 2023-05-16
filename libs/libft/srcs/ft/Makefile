@@ -6,7 +6,7 @@
 #    By: thfirmin <thfirmin@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/06 14:23:56 by thfirmin          #+#    #+#              #
-#    Updated: 2023/04/28 23:53:38 by thfirmin         ###   ########.fr        #
+#    Updated: 2023/05/13 13:19:42 by thfirmin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,26 +57,18 @@ SRCS	= ft_isalpha.c \
 		  ft_putstr_fd.c \
 		  ft_putendl_fd.c \
 		  ft_putnbr_fd.c \
-		  ft_isspace.c
-
-BN_SRCS	= ft_lstadd_back_bonus.c \
-		  ft_lstadd_front_bonus.c \
-		  ft_lstclear_bonus.c \
-		  ft_lstdelone_bonus.c \
-		  ft_lstiter_bonus.c \
-		  ft_lstlast_bonus.c \
-		  ft_lstmap_bonus.c \
-		  ft_lstnew_bonus.c \
-		  ft_lstsize_bonus.c
+		  ft_isspace.c \
+		  ft_malloc.c \
+		  ft_free.c \
+		  ft_memadd_back.c \
+		  ft_memadd_front.c \
+		  ft_memnew.c \
+		  ft_memsize.c \
+		  ft_sumary.c \
+		  ft_freel.c
 
 OBJS	= $(SRCS:.c=.o)
 
-BN_OBJS	= $(subst .c,.o,$(BN_SRCS))
-
-# <+-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-' #
-# +>                                    ALIASES 
-
-BN_OTOC	= $(subst .o,.c,$@)
 # <+-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-' #
 # +>                                     CODES 
 
@@ -128,40 +120,9 @@ endif
 
 re:		fclean all
 # <+-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-' #
-# +>                                     BONUS
-
-bonus:	all $(BN_OBJS)
-
-$(BN_OBJS):	$(BN_SRCS)
-	@if [ "$(BN_OTOC)" = "$(findstring $(BN_OTOC),$?)" ]; then \
-		if [ "$(LOG)" = "1" ]; then \
-			printf "${CC} ${CFLAGS} ${DFLAGS} ${OFLAGS} ${IFLAGS} -c $*.c ${LFLAGS} -o $@\n"; \
-		fi; \
-		$(CC) $(CFLAGS) $(DFLAGS) $(OFLAGS) $(IFLAGS) -c $*.c $(LFLAGS) -o $@; \
-	else \
-		touch $@; \
-	fi
-	@if [ "$@" = "$(lastword $(BN_OBJS))" ]; then \
-		printf "[${YELLOW}${BOLD}INFO${NULL}] ${UNDINE}Compiling${NULL} ${PROJ} bonus\n" $(REDIR); \
-		if [ "$(LOG)" = "1" ]; then printf "ar -rcs ${MASTERLIB} ${BN_OBJS}\n"; fi; \
-		ar -rcs $(MASTERLIB) $(BN_OBJS); \
-		if [ "$(LOG)" = "1" ]; then printf "ranlib ${MASTERLIB}\n"; fi; \
-		ranlib $(MASTERLIB); \
-		printf "[${GREEN}${BOLD}INFO${NULL}] ${BOLD}Compiled ${PROJ} bonus${NULL}\n" $(REDIR); \
-	fi
-
-bclean:
-ifneq (,$(shell ls $(BN_OBJS) 2> /dev/null))
-	@printf "[${YELLOW}${BOLD}INFO${NULL}] ${UNDLINE}Deleting${NULL} ${PROJ} bonus objects\n" $(REDIR)
-	rm -rf $(shell ls $(BN_OBJS) 2> /dev/null)
-	@printf "[${BLUE}${BOLD}INFO${NULL}] ${BOLD}Deleted ${PROJ} bonus objects${NULL}\n" $(REDIR)
-endif
-
-bre:	fclean bonus
-# <+-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-' #
 # +>                                     CLEAN 
 
-clean:	mclean bclean
+clean:	mclean
 
 fclean:	clean
 # <+-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-' #

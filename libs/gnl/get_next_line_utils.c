@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsantann <jsantann@student.42.rio>         +#+  +:+       +#+        */
+/*   By: thfirmin <thfirmin@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/16 16:37:47 by jsantann          #+#    #+#             */
-/*   Updated: 2023/05/16 16:37:59 by jsantann         ###   ########.fr       */
+/*   Created: 2022/07/14 01:28:52 by thfirmin          #+#    #+#             */
+/*   Updated: 2022/12/23 15:27:05 by thfirmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

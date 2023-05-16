@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_sumary.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thfirmin <thfirmin@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/06 15:04:00 by thfirmin          #+#    #+#             */
-/*   Updated: 2023/01/21 11:02:41 by thfirmin         ###   ########.fr       */
+/*   Created: 2023/05/12 14:13:50 by thfirmin          #+#    #+#             */
+/*   Updated: 2023/05/14 10:12:53 by thfirmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// Iterate a linked list modifying itself
-void	ft_lstiter(t_list *lst, void (*f)(void *))
+void	ft_sumary(t_mem *mem)
 {
-	while (lst)
+	int	i;
+
+	ft_printf ("\n--------------------| SUMARY |-------------------\n");
+	ft_printf ("Bytes allocate'd: %d\n", ft_memsize(mem));
+	i = -1;
+	while (mem)
 	{
-		if (f)
-			f(lst->content);
-		lst = lst->next;
+		ft_printf ("----------------------------------------\n");
+		ft_printf ("block[%d]:\t", ++i);
+		ft_printf ("%p ", mem->ptr);
+		ft_printf ("[%s]\n", mem->context);
+		mem = mem->next;
 	}
+	ft_printf ("--------------------| END |-------------------\n");
 }
