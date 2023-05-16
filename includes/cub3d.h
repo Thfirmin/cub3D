@@ -20,7 +20,11 @@
 # include "libft.h"
 # include "mlx.h"
 
-// Enums
-// Structs & Unions
-// Main
+typedef struct s_cube
+{
+	char	**map;
+	char	**path;
+	t_mem	*sum;	
+}	t_cube;
+
 #endif
