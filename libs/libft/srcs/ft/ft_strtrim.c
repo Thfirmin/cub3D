@@ -6,7 +6,7 @@
 /*   By: thfirmin <thfirmin@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 00:06:44 by thfirmin          #+#    #+#             */
-/*   Updated: 2023/05/14 10:36:01 by thfirmin         ###   ########.fr       */
+/*   Updated: 2023/01/20 21:10:42 by thfirmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	ft_setcmp(char const *s1, char const *set, int p, int sig);
 
 // Remove leading and trailing a set of characters
-char	*ft_strtrim(char const *s1, char const *set, t_mem **mem)
+char	*ft_strtrim(char const *s1, char const *set)
 {
 	int		start;
 	int		len;
@@ -23,7 +23,7 @@ char	*ft_strtrim(char const *s1, char const *set, t_mem **mem)
 
 	start = ft_setcmp(s1, set, 0, 1);
 	len = ft_setcmp(s1, set, (ft_strlen(s1) - 1), -1);
-	str = ft_substr(s1, start, ((len - start) + 1), mem);
+	str = ft_substr(s1, start, ((len - start) + 1));
 	return (str);
 }
 

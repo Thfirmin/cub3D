@@ -6,19 +6,19 @@
 /*   By: thfirmin <thfirmin@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 02:16:31 by thfirmin          #+#    #+#             */
-/*   Updated: 2023/05/14 10:31:24 by thfirmin         ###   ########.fr       */
+/*   Updated: 2023/01/21 11:36:01 by thfirmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 // Iterate a string modifying a allocated copy
-char	*ft_strmapi(char const *s, char (*f) (unsigned int, char), t_mem **mem)
+char	*ft_strmapi(char const *s, char (*f) (unsigned int, char))
 {
 	char			*str;
 	unsigned int	i;
 
-	str = ft_calloc((ft_strlen(s) + 1), sizeof(char), "ft_strmapi", mem);
+	str = malloc(sizeof(char) * (ft_strlen(s) + 1));
 	if (!str)
 		return (0);
 	i = -1;

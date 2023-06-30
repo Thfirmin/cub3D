@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thfirmin <thfirmin@student.42.rio>         +#+  +:+       +#+        */
+/*   By: tde-souz <tde-souz@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/27 05:25:23 by thfirmin          #+#    #+#             */
-/*   Updated: 2023/01/21 11:23:22 by thfirmin         ###   ########.fr       */
+/*   Created: 2022/10/06 14:54:49 by thfirmin          #+#    #+#             */
+/*   Updated: 2023/04/28 22:03:33 by tde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// Duplicate a string into a allocated string
-char	*ft_strdup(const char *s1)
+//  Add a node at the end of a list
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	char	*str;
-	char	*ptr;
+	t_list	*node;
 
-	str = malloc(ft_strlen(s1) + 1);
-	if (!str)
-		return (0);
-	ptr = str;
-	while (*s1)
-		*str++ = *s1++;
-	*str = '\0';
-	return (ptr);
+	node = *lst;
+	if (node)
+		while (node->next)
+			node = node->next;
+	if (!node)
+		*lst = new;
+	else
+		node->next = new;
 }

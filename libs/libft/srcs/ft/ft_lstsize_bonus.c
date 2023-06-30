@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_malloc.c                                        :+:      :+:    :+:   */
+/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thfirmin <thfirmin@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/12 14:06:40 by thfirmin          #+#    #+#             */
-/*   Updated: 2023/05/14 10:52:53 by thfirmin         ###   ########.fr       */
+/*   Created: 2022/10/06 15:06:56 by thfirmin          #+#    #+#             */
+/*   Updated: 2023/01/21 11:12:08 by thfirmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_malloc(size_t size, char *context, t_mem **mem)
+// Return the number of nodes in a list
+int	ft_lstsize(t_list *lst)
 {
-	void	*ptr;
+	int	size;
 
-	ptr = malloc(size);
-	if (ptr && mem)
-		ft_memadd_back(mem, ft_memnew(ptr, context));
-	return (ptr);
+	size = 0;
+	while (lst && ++size)
+		lst = lst->next;
+	return (size);
 }

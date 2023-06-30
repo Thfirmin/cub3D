@@ -1,33 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thfirmin <thfirmin@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/09 23:22:34 by thfirmin          #+#    #+#             */
-/*   Updated: 2023/01/21 11:29:17 by thfirmin         ###   ########.fr       */
+/*   Created: 2022/10/06 15:05:20 by thfirmin          #+#    #+#             */
+/*   Updated: 2023/03/07 20:01:07 by thfirmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// Concatenate two strings in a allocated string
-char	*ft_strjoin(char const *s1, char const *s2)
+// Iterate a linked list modifying a allocated copy
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	char	*newstr;
-	char	*ptr;
+	t_list	*newlst;
+	t_list	*node;
+	void	*cont;
 
-	newstr = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
-	if (!newstr)
-		return ((void *)0);
-	ptr = newstr;
-	if (s1)
-		while (*s1)
-			*newstr++ = *s1++;
-	if (s2)
-		while (*s2)
-			*newstr++ = *s2++;
-	*newstr = '\0';
-	return (ptr);
+	newlst = (void *)0;
+	while (lst)
+	{
+		cont = lst->content;
+		if (f)
+			cont = f(cont);
+		node = ft_lstnew(cont);
+		if (!node)
+		{
+			ft_lstclear(&newlst, del);
+			return (0);
+		}
+		ft_lstadd_back(&newlst, node);
+		lst = lst->next;
+	}
+	return (newlst);
 }
